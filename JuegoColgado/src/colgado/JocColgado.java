@@ -22,46 +22,48 @@ Contabilizar los intentos restantes para cada jugador.
 Mostrar el estado de la palabra secreta después de cada intento.
 Al finalizar las rondas, mostrar el nombre del jugador que haya ganado más rondas.*/
 package colgado;
+
 import java.util.Scanner;
 import java.util.Random;
 
 public class JocColgado {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        String[] paraules = new String[] {"patata", "hipopotamo", "pernil", "gelat", "tallarins", "mandonguilles", "gat", "taula"};
+        Random generadorNumeros = new Random();
 
-	public static void main(String[] args) {
+        String enter;
+        String paraulaEscollida;
+        String opcioLletra;
+     
 
-		Scanner s = new Scanner(System.in);
-		//Creo String Array pe a poder ficar diferentes opcions que escollirà el Random 
-		String[] paraules = new String[] {"patata","hipopotamo","pernil","gelat","tallarins","mandonguilles","gat","taula"};
-		Random generadorNumeros = new Random(); 
-		String enter;  //Serveix per separar el joc de la introducció
-		String paraulaEscollida; 
-		
-		
-		System.out.println("|=====================================|");
-		System.out.println("          BENVINGUT AL PENJAT!       ");
-		System.out.println("|=====================================|");
-		System.out.println("-> Endevina la paraula amagada lletra a lletra.");
-		System.out.println("-> Si t'equivoques massa vegades... et penjaran!");
-		System.out.println("\n \n \n Normes del joc:");
-		System.out.println("- Pots proposar una lletra per torn.");
-		System.out.println("- Cada error et portarà més a prop del penjat.");
-		System.out.println("- Endevina la paraula abans que sigui massa tard!");
-		System.out.println("|******************************************|");
-		System.out.println(" Toca ENTER per començar el joc! Bona sort! ");
-		System.out.println("|******************************************|");
-		
-		enter = s.nextLine(); 
-		
-		paraulaEscollida = paraules[generadorNumeros.nextInt(7)];
-		System.out.println("La Paraula que li toca te "+ paraulaEscollida.length() +"lletres.");
-		System.out.println("Adivinales abans de fallar 6 cops i ser penjat!"); 
-		
-		
-		
-		
-		
-		
-		
-	}
+        System.out.println("|=====================================|");
+        System.out.println("          BENVINGUT AL PENJAT!       ");
+        System.out.println("|=====================================|");
+        System.out.println("-> Endevina la paraula amagada lletra a lletra.");
+        System.out.println("-> Si t'equivoques massa vegades... et penjaran!");
+        System.out.println("\n \n \n Normes del joc:");
+        System.out.println("- Pots proposar una lletra per torn.");
+        System.out.println("- Cada error et portarà més a prop del penjat.");
+        System.out.println("- Endevina la paraula abans que sigui massa tard!");
+        System.out.println("|******************************************|");
+        System.out.println(" Toca ENTER per començar el joc! Bona sort! ");
+        System.out.println("|******************************************|");
 
+        enter = s.nextLine();
+
+        paraulaEscollida = paraules[generadorNumeros.nextInt(paraules.length)];
+        int tamanyParaula = paraulaEscollida.length();
+        char[] resposta = new char[tamanyParaula];
+
+        System.out.println("La Paraula que li toca té " + tamanyParaula + " lletres.");
+        System.out.println("Adivina-les abans de fallar 6 cops i ser penjat!");
+
+        //Bucle per a passar la paraula a X 
+        for (int i = 0; i < tamanyParaula; i++) {
+            resposta[i] = 'x';
+        }
+
+   
+    }
 }
