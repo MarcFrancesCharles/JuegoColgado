@@ -1,4 +1,5 @@
-/*Crear una versión del juego del "Colgado" en Java, en el cual los jugadores intentan adivinar una palabra secreta, letra por letra, en un número limitado de rondas. El juego terminará cuando un jugador adivine la palabra correctamente o se alcance el límite de intentos permitidos.
+/*Crear una versión del juego del "Colgado" en Java, en el cual los jugadores intentan adivinar una palabra secreta, letra por letra, en un número limitado de rondas.
+ *  El juego terminará cuando un jugador adivine la palabra correctamente o se alcance el límite de intentos permitidos.
 
 Reglas del juego:
 
@@ -23,10 +24,32 @@ Al finalizar las rondas, mostrar el nombre del jugador que haya ganado más rond
 package colgado;
 import java.util.Scanner;
 import java.util.Random;
+
 public class JocColgado {
 
 	public static void main(String[] args) {
 
+		Scanner s = new Scanner(System.in);
+		//Creo String Array pe a poder ficar diferentes opcions que escollirà el Random 
+		String[] paraules = new String[] {"patata","hipopotamo","pernil","gelat","tallarins","mandonguilles","gat","taula"};
+		Random random = new Random();
+		
+		
+		
+		System.out.println("|=====================================|");
+		System.out.println("          BENVINGUT AL PENJAT!       ");
+		System.out.println("|=====================================|");
+		System.out.println("-> Endevina la paraula amagada lletra a lletra.");
+		System.out.println("-> Si t'equivoques massa vegades... et penjaran!");
+		System.out.println("\n \n \n Normes del joc:");
+		System.out.println("- Pots proposar una lletra per torn.");
+		System.out.println("- Cada error et portarà més a prop del penjat.");
+		System.out.println("- Endevina la paraula abans que sigui massa tard!");
+		System.out.println("|******************************************|");
+		System.out.println(" Toca ENTER per començar el joc! Bona sort! ");
+		System.out.println("|******************************************|");
+		
+		
 		
 	}
 
