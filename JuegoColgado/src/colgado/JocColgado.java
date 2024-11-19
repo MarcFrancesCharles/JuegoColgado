@@ -32,8 +32,9 @@ public class JocColgado {
 		Scanner s = new Scanner(System.in);
 		//Creo String Array pe a poder ficar diferentes opcions que escollirà el Random 
 		String[] paraules = new String[] {"patata","hipopotamo","pernil","gelat","tallarins","mandonguilles","gat","taula"};
-		Random random = new Random();
-		
+		Random generadorNumeros = new Random(); 
+		String enter;  //Serveix per separar el joc de la introducció
+		String paraulaEscollida; 
 		
 		
 		System.out.println("|=====================================|");
@@ -48,6 +49,16 @@ public class JocColgado {
 		System.out.println("|******************************************|");
 		System.out.println(" Toca ENTER per començar el joc! Bona sort! ");
 		System.out.println("|******************************************|");
+		
+		enter = s.nextLine(); 
+		
+		paraulaEscollida = paraules[generadorNumeros.nextInt(7)];
+		System.out.println("La Paraula que li toca te "+ paraulaEscollida.length() +"lletres.");
+		System.out.println("Adivinales abans de fallar 6 cops i ser penjat!"); 
+		
+		
+		
+		
 		
 		
 		
