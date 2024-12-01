@@ -24,6 +24,7 @@ Al finalizar las rondas, mostrar el nombre del jugador que haya ganado más rond
 package colgado;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class JocColgado {
@@ -37,6 +38,9 @@ public class JocColgado {
         String opcioLletra;
         int vidas = 5;
         int acerts = 0;
+        int numJugadors = 0; 
+        int numRondes = 0; 
+
 
         System.out.println("|=====================================|");
         System.out.println("          BENVINGUT AL PENJAT!       ");
@@ -57,8 +61,42 @@ public class JocColgado {
         int tamanyParaula = paraulaEscollida.length();
         char[] resposta = new char[tamanyParaula];
 
-        System.out.println("La Paraula que li toca té " + tamanyParaula + " lletres.");
-        System.out.println("Adivina-les abans de fallar 6 cops i ser penjat!");
+        
+    	while (numJugadors < 1 || numJugadors > 5 ) {
+    		try { // Intenta fer codi
+	    		System.out.println("\n Cuants Jugadors voleu ser (1-5) :");
+	    		numJugadors = s.nextInt();
+	    		
+	    		if (numJugadors < 1 || numJugadors > 5) {
+	    			System.out.println("Jugadors de 1 a 5");
+	    		}
+    			
+    		}catch (InputMismatchException e) {  // Si detecta error , fa codig cacth
+    			System.out.println("\n Només numeros");
+    			s.nextLine();
+    		}
+    	}
+        	
+    	
+    	 
+    	while (numRondes < 1 || numRondes > 10 ) {
+    		try {
+	    		System.out.println("\n Cuants partides voleu jugar?");
+	    		numRondes = s.nextInt();
+	    		
+	    		if (numRondes < 1 || numRondes > 5) {
+	    			System.out.println("Partides de 1 a 10");
+	    		}
+    			
+    		}catch (InputMismatchException e) {
+    			System.out.println("\n Només numeros");
+    			s.nextLine();
+    		}
+    	}
+        
+        
+        System.out.println("La Paraula que els hi a toca té " + tamanyParaula + " lletres.");
+        System.out.println("Qui l'adivini abans de fallar 6 cops guanya");
 
         for (int i = 0; i < tamanyParaula; i++) {
             resposta[i] = 'x';
@@ -67,6 +105,7 @@ public class JocColgado {
         while (vidas > 0 && acerts < tamanyParaula) {
             System.out.println("Paraula: " + String.valueOf(resposta));
             System.out.println("Introdueix una lletra:");
+            s.nextLine();  // Buido per a que no dono error
             opcioLletra = s.nextLine();
 
             boolean encertat = false;
