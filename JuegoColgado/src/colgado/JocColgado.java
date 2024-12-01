@@ -43,6 +43,9 @@ public class JocColgado {
         int partidaActual = 1;
         int tamanyParaula;
         char[] resposta;
+        int[] acertsJugadors;
+        int jugadorGuanyador = 0;
+        int acertsMesGran = 0;
 
 
         System.out.println("|=====================================|");
@@ -80,6 +83,8 @@ public class JocColgado {
     		}
     	}
         	
+    	acertsJugadors = new int[numJugadors]; // Inicialitzem array acertsJugadors amb tants espais com jugadors hi hagin.
+    	
     	
     	 
     	while (numRondes < 1 || numRondes > 10 ) {
@@ -104,48 +109,66 @@ public class JocColgado {
         	System.out.println("\n \n La Paraula que els hi a toca té " + tamanyParaula + " lletres.");
         	System.out.println("Qui l'adivini abans de fallar 6 cops guanya");
         	
-        	for (int i = 0; i < tamanyParaula; i++) {
+        	for (int i = 0; i < tamanyParaula; i++) { // Preparem per mostrar les lletres com "x"
         		resposta[i] = 'x';
         	}
+        	
+        	for (int x = 0; x < acertsJugadors.length; x++) { // Establim els acerts dels jugadors a 0
+    			acertsJugadors[x] = 0;
+    		}
+        	
 	        while (vidas > 0 && acerts < tamanyParaula) {
-	        	
-	            
-	            System.out.println("\n Paraula: " + String.valueOf(resposta));
-	            System.out.println("Introdueix una lletra:");
-	            
-	            if (opcioLletra == null || opcioLletra.isEmpty()) {   
-	                // Llimpia buufer
-	                s.nextLine();
-	            }
-	            
-	            do {
-	                opcioLletra = s.nextLine().toLowerCase(); // Leer entrada y convertir a minúscula
-	                if (opcioLletra.isEmpty() || opcioLletra.length() > 1) {
-	                    System.out.println("Si us plau, introdueix només una lletra.");
-	                }
-	            } while (opcioLletra.isEmpty() || opcioLletra.length() > 1);
-	            
-	            opcioLletra.toLowerCase();
-	
-	            boolean encertat = false;
-	            for (int i = 0; i < tamanyParaula; i++) {
-	                if (paraulaEscollida.charAt(i) == opcioLletra.charAt(0) && resposta[i] == 'x') {
-	                    resposta[i] = opcioLletra.charAt(0);
-	                    encertat = true;
-	                    acerts++;
-	                }
-	            }
-	
-	            if (!encertat) {
-	                vidas--;
-	                System.out.println("Incorrecte! Et queden " + vidas + " vides.");
-	            }
-	
-	            if (acerts == tamanyParaula) {
-	                System.out.println("Has guanyat! La paraula era: " + paraulaEscollida);
-	            } else if (vidas == 0) {
-	                System.out.println("Has perdut! La paraula era: " + paraulaEscollida);
-	            }
+	        	for(int x = 0; x < numJugadors; x++) { // For que controla el torn dels jugadors
+	        		System.out.println("Torn del jugador " + (x+1));
+	        		
+	        		System.out.println("\n Paraula: " + String.valueOf(resposta));
+		            System.out.println("Introdueix una lletra:");
+		            
+		            if (opcioLletra == null || opcioLletra.isEmpty()) {   
+		                // Llimpia buufer
+		                s.nextLine();
+		            }
+		            
+		            do {
+		                opcioLletra = s.nextLine().toLowerCase(); // passe a minuscules
+		                if (opcioLletra.isEmpty() || opcioLletra.length() > 1) {
+		                    System.out.println("Si us plau, introdueix només una lletra.");
+		                }
+		            } while (opcioLletra.isEmpty() || opcioLletra.length() > 1);
+		            
+		            opcioLletra.toLowerCase();
+		
+		            boolean encertat = false;
+		            for (int i = 0; i < tamanyParaula; i++) {
+		                if (paraulaEscollida.charAt(i) == opcioLletra.charAt(0) && resposta[i] == 'x') {
+		                    resposta[i] = opcioLletra.charAt(0);
+		                    encertat = true;
+		                    acerts++;
+		                    acertsJugadors[x]++;
+		                }
+		            }
+		
+		            if (!encertat) {
+		                vidas--;
+		                System.out.println("Incorrecte! Us queden " + vidas + " vides.");
+		            }
+		
+		            if (acerts == tamanyParaula) {
+		            	for (int i = 0; i < acertsJugadors.length; i++) { // Comprovem el jugador amb més encerts
+			            	if(acertsJugadors[i] > acertsMesGran) {
+			            		acertsMesGran = acertsJugadors[i];
+			            		jugadorGuanyador = i;
+			            	}
+						}
+		            	System.out.println("Ha guanyat el jugador " + (jugadorGuanyador + 1));
+		            	break;
+		            } else if (vidas == 0) {
+		                System.out.println("No heu endivinat la paraula, ha guanyat el jugador " + jugadorGuanyador);
+		                break;
+		            }
+		            
+		            
+	        	}
 	        }
 	        partidaActual++;
             vidas = 6;   //Reinicio contador de vides i acets
