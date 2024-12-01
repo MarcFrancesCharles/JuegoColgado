@@ -35,7 +35,8 @@ public class JocColgado {
         String enter;
         String paraulaEscollida;
         String opcioLletra;
-     
+        int vidas = 5;
+        int acerts = 0;
 
         System.out.println("|=====================================|");
         System.out.println("          BENVINGUT AL PENJAT!       ");
@@ -59,11 +60,36 @@ public class JocColgado {
         System.out.println("La Paraula que li toca té " + tamanyParaula + " lletres.");
         System.out.println("Adivina-les abans de fallar 6 cops i ser penjat!");
 
-        //Bucle per a passar la paraula a X 
         for (int i = 0; i < tamanyParaula; i++) {
             resposta[i] = 'x';
         }
 
-   
+        while (vidas > 0 && acerts < tamanyParaula) {
+            System.out.println("Paraula: " + String.valueOf(resposta));
+            System.out.println("Introdueix una lletra:");
+            opcioLletra = s.nextLine();
+
+            boolean encertat = false;
+            for (int i = 0; i < tamanyParaula; i++) {
+                if (paraulaEscollida.charAt(i) == opcioLletra.charAt(0) && resposta[i] == 'x') {
+                    resposta[i] = opcioLletra.charAt(0);
+                    encertat = true;
+                    acerts++;
+                }
+            }
+
+            if (!encertat) {
+                vidas--;
+                System.out.println("Incorrecte! Et queden " + vidas + " vides.");
+            }
+
+            if (acerts == tamanyParaula) {
+                System.out.println("Has guanyat! La paraula era: " + paraulaEscollida);
+            } else if (vidas == 0) {
+                System.out.println("Has perdut! La paraula era: " + paraulaEscollida);
+            }
+        }
+
+        s.close();
     }
 }
